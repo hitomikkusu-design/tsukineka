@@ -214,6 +214,23 @@ function getWeather() {
 // ============================================================
 
 /**
+ * タイムゾーンを考慮して日付範囲を返す
+ * @param {number} offsetDays 0=今日, 1=明日
+ * @returns {{start: Date, end: Date}}
+ */
+function getDateRange(offsetDays) {
+  const timezone = tz();
+  const ms = new Date().getTime() + offsetDays * 24 * 60 * 60 * 1000;
+  const dateStr = Utilities.formatDate(new Date(ms), timezone, 'yyyy/MM/dd');
+  const parts = dateStr.split('/').map(Number);
+  const y = parts[0], m = parts[1] - 1, d = parts[2];
+  return {
+    start: new Date(y, m, d,     0, 0, 0),
+    end:   new Date(y, m, d + 1, 0, 0, 0)  // 翌日0時（exclusive）
+  };
+}
+
+/**
  * 全カレンダーから指定期間のイベントを重複なしで取得する
  */
 function fetchCalendarEvents(start, end) {
@@ -277,9 +294,7 @@ function formatEvents(events) {
  */
 function getTodayCalendar() {
   try {
-    const now   = new Date();
-    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-    const end   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+    const { start, end } = getDateRange(0);
     return formatEvents(fetchCalendarEvents(start, end));
   } catch (e) {
     Logger.log('getTodayCalendar エラー: ' + e.message);
@@ -292,10 +307,7 @@ function getTodayCalendar() {
  */
 function getTomorrowCalendar() {
   try {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const start = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0);
-    const end   = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 23, 59, 59);
+    const { start, end } = getDateRange(1);
     return formatEvents(fetchCalendarEvents(start, end));
   } catch (e) {
     Logger.log('getTomorrowCalendar エラー: ' + e.message);
@@ -304,14 +316,14 @@ function getTomorrowCalendar() {
 }
 
 /**
- * 今夜（18:00〜23:59）の予定
+ * 今夜（18:00〜翌0:00）の予定
  */
 function getEveningCalendar() {
   try {
-    const now   = new Date();
-    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0);
-    const end   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-    return formatEvents(fetchCalendarEvents(start, end));
+    const { start: dayStart, end: dayEnd } = getDateRange(0);
+    const start = new Date(dayStart.getTime());
+    start.setHours(18, 0, 0, 0);
+    return formatEvents(fetchCalendarEvents(start, dayEnd));
   } catch (e) {
     Logger.log('getEveningCalendar エラー: ' + e.message);
     return 'カレンダー取得エラー: ' + e.message;
