@@ -92,8 +92,8 @@ function handleIncomingMessage(event) {
     return;
   }
 
-  // 自由入力 → AI
-  replyLine(replyToken, callOpenAI(buildAIPrompt(text)));
+  // 自由入力 → AI で意図判定してから実行
+  replyLine(replyToken, handleWithAI(text));
 }
 
 const HELP_TEXT = `📋 コマンド一覧
@@ -461,33 +461,75 @@ function completeTaskByNumber(num) {
 }
 
 // ============================================================
-// 9. AI（OpenAI gpt-4o-mini）
+// 9. AI（OpenAI gpt-4o-mini）— 意図判定 + 実行
 // ============================================================
-function buildAIPrompt(userMessage) {
-  const tasks = getTasksByPriority();
-  const now   = Utilities.formatDate(new Date(), tz(), 'yyyy/MM/dd HH:mm');
-  return `あなたは梶永瞳さんの専属AI相棒「月詠」です。
-現在日時：${now}
-現在のタスク状況：
-${tasks}
-ユーザーのメッセージ：${userMessage}`;
-}
 
-function callOpenAI(prompt) {
+/**
+ * 自然言語メッセージを受け取り、意図をAIで判定して実行する
+ */
+function handleWithAI(text) {
   const apiKey = getConfig('OPENAI_API_KEY');
   if (!apiKey) return '⚠️ OPENAI_API_KEY が未設定です';
+
+  const now  = Utilities.formatDate(new Date(), tz(), 'yyyy/MM/dd HH:mm');
+  const year = new Date().getFullYear();
+
+  const tools = [
+    {
+      type: 'function',
+      function: {
+        name: 'add_calendar_event',
+        description: 'Googleカレンダーに予定を追加する。日付・時刻・タイトルを含むメッセージに使う。',
+        parameters: {
+          type: 'object',
+          properties: {
+            title:      { type: 'string',  description: '予定のタイトル' },
+            month:      { type: 'integer', description: '月（1〜12）' },
+            day:        { type: 'integer', description: '日（1〜31）' },
+            start_hour: { type: 'integer', description: '開始時（0〜23）。終日の場合は省略' },
+            start_min:  { type: 'integer', description: '開始分（0〜59）。終日の場合は省略' },
+            end_hour:   { type: 'integer', description: '終了時（0〜23）。省略時は開始+1時間' },
+            end_min:    { type: 'integer', description: '終了分（0〜59）。省略時は開始分と同じ' },
+            all_day:    { type: 'boolean', description: '終日イベントの場合はtrue' }
+          },
+          required: ['title', 'month', 'day']
+        }
+      }
+    },
+    {
+      type: 'function',
+      function: {
+        name: 'add_task',
+        description: 'タスクリストにやることを追加する。買い物・仕事・ToDoなどスケジュールのない項目に使う。',
+        parameters: {
+          type: 'object',
+          properties: {
+            text:     { type: 'string', description: 'タスクの内容' },
+            priority: { type: 'string', enum: ['HIGH', 'MEDIUM', 'LOW'], description: '優先度' },
+            deadline: { type: 'string', description: '期限（yyyy/MM/dd 形式）。なければ省略' }
+          },
+          required: ['text']
+        }
+      }
+    }
+  ];
 
   const payload = {
     model: 'gpt-4o-mini',
     messages: [
       {
         role: 'system',
-        content: 'あなたは梶永瞳さんの専属AI相棒「月詠」です。気さくで的確、LINEでのやりとりなので簡潔に、でも本質をついた返答をしてください。'
+        content: `あなたは梶永瞳さんの専属AI相棒「月詠」です。現在日時：${now}
+ユーザーのメッセージが「予定・スケジュール・日時付きの用事」なら add_calendar_event を呼び出してください。
+「タスク・やること・ToDoリスト」なら add_task を呼び出してください。
+どちらでもない場合は、気さくで的確に日本語で返答してください。LINEなので簡潔に。`
       },
-      { role: 'user', content: prompt }
+      { role: 'user', content: text }
     ],
-    max_tokens: 1024,
-    temperature: 0.7
+    tools: tools,
+    tool_choice: 'auto',
+    max_tokens: 512,
+    temperature: 0.3
   };
 
   try {
@@ -499,9 +541,65 @@ function callOpenAI(prompt) {
     });
     const data = JSON.parse(res.getContentText());
     if (data.error) return '⚠️ OpenAI APIエラー: ' + data.error.message;
-    return data.choices?.[0]?.message?.content || '（応答なし）';
+
+    const choice   = data.choices?.[0];
+    const msg      = choice?.message;
+    const toolCall = msg?.tool_calls?.[0];
+
+    // ── ツール呼び出しが返ってきた場合 ──
+    if (toolCall) {
+      let args;
+      try { args = JSON.parse(toolCall.function.arguments); }
+      catch (e) { return 'AIの返答パースに失敗しました'; }
+
+      if (toolCall.function.name === 'add_calendar_event') {
+        return execAddCalendarEvent(args, year);
+      }
+      if (toolCall.function.name === 'add_task') {
+        addTask(args.text, args.priority || 'MEDIUM', args.deadline || '', '');
+        return `✅ タスク追加しました！\n「${args.text}」`;
+      }
+    }
+
+    // ── 通常の会話返答 ──
+    return msg?.content || '（応答なし）';
   } catch (e) {
+    Logger.log('handleWithAI エラー: ' + e.message);
     return '通信エラー: ' + e.message;
+  }
+}
+
+/**
+ * AI が返したカレンダー引数を元に予定を追加する
+ */
+function execAddCalendarEvent(args, year) {
+  try {
+    const title = args.title;
+    const m     = args.month - 1;
+    const d     = args.day;
+
+    if (args.all_day) {
+      const date = new Date(year, m, d);
+      CalendarApp.getDefaultCalendar().createAllDayEvent(title, date);
+      const ds = Utilities.formatDate(date, tz(), 'M月d日');
+      return `📅 終日予定追加しました！\n「${title}」\n${ds}（終日）`;
+    }
+
+    const sh = args.start_hour != null ? args.start_hour : 0;
+    const sm = args.start_min  != null ? args.start_min  : 0;
+    const eh = args.end_hour   != null ? args.end_hour   : sh + 1;
+    const em = args.end_min    != null ? args.end_min    : sm;
+
+    const start = new Date(year, m, d, sh, sm);
+    const end   = new Date(year, m, d, eh, em);
+    CalendarApp.getDefaultCalendar().createEvent(title, start, end);
+
+    const ds = Utilities.formatDate(start, tz(), 'M月d日 HH:mm');
+    const de = Utilities.formatDate(end,   tz(), 'HH:mm');
+    return `📅 予定追加しました！\n「${title}」\n${ds}〜${de}`;
+  } catch (e) {
+    Logger.log('execAddCalendarEvent エラー: ' + e.message);
+    return 'カレンダー追加エラー: ' + e.message;
   }
 }
 
