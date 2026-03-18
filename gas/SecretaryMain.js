@@ -49,51 +49,66 @@ function doPost(e) {
 
 function handleIncomingMessage(event) {
   const replyToken = event.replyToken;
+  const userId     = (event.source && event.source.userId) || getConfig('LINE_USER_ID');
   const text       = event.message.text.trim();
 
-  // ✅ タスク完了（例: ✅1 または done 1）
-  if (/^✅\s*\d+$/.test(text) || /^done\s*\d+$/i.test(text)) {
-    const num = parseInt(text.replace(/[^\d]/g, ''));
-    replyLine(replyToken, completeTaskByNumber(num));
-    return;
+  try {
+    // ✅ タスク完了（例: ✅1 または done 1）
+    if (/^✅\s*\d+$/.test(text) || /^done\s*\d+$/i.test(text)) {
+      const num = parseInt(text.replace(/[^\d]/g, ''));
+      replyLine(replyToken, completeTaskByNumber(num));
+      return;
+    }
+
+    const commands = {
+      '/briefing':  () => buildMorningBriefing(),
+      'ブリーフィング': () => buildMorningBriefing(),
+      '/evening':   () => buildEveningBriefing(),
+      '夜':         () => buildEveningBriefing(),
+      '/tasks':     () => formatTaskList(),
+      'タスク':     () => formatTaskList(),
+      '/calendar':  () => getTodayCalendar(),
+      '予定':       () => getTodayCalendar(),
+      '今日の予定':  () => getTodayCalendar(),
+      '明日の予定':  () => getTomorrowCalendar(),
+      '/help':      () => HELP_TEXT,
+      'help':       () => HELP_TEXT,
+      'ヘルプ':     () => HELP_TEXT,
+    };
+
+    if (commands[text]) {
+      replyLine(replyToken, commands[text]());
+      return;
+    }
+
+    if (text.startsWith('/add ') || text.startsWith('追加 ')) {
+      const taskText = text.replace(/^\/add |^追加 /, '').trim();
+      addTask(taskText);
+      replyLine(replyToken, '✅ タスク追加しました！\n「' + taskText + '」');
+      return;
+    }
+
+    // 📅 カレンダー予定追加
+    // 書式: /cal MM/DD HH:MM タイトル  または  /cal MM/DD タイトル（終日）
+    if (text.startsWith('/cal ') || text.startsWith('予定追加 ')) {
+      replyLine(replyToken, addCalendarEvent(text.replace(/^\/cal |^予定追加 /, '').trim()));
+      return;
+    }
+
+    // 自由入力 → AI で意図判定してから実行
+    // replyToken は約1分で失効するため、AI処理後は pushLine で送信する
+    replyLine(replyToken, '⌛ 少々お待ちを...');
+    const aiResult = handleWithAI(text);
+    pushLine(userId, aiResult);
+
+  } catch (err) {
+    Logger.log('handleIncomingMessage エラー: ' + err);
+    try {
+      pushLine(userId, '⚠️ エラーが発生しました。もう一度試してね！\n(' + err.message + ')');
+    } catch (e2) {
+      Logger.log('pushLine フォールバックも失敗: ' + e2);
+    }
   }
-
-  const commands = {
-    '/briefing': () => buildMorningBriefing(),
-    'ブリーフィング': () => buildMorningBriefing(),
-    '/evening':  () => buildEveningBriefing(),
-    '夜':        () => buildEveningBriefing(),
-    '/tasks':    () => formatTaskList(),
-    'タスク':    () => formatTaskList(),
-    '/calendar': () => getTodayCalendar(),
-    '予定':      () => getTodayCalendar(),
-    '今日の予定': () => getTodayCalendar(),
-    '明日の予定': () => getTomorrowCalendar(),
-    '/help':     () => HELP_TEXT,
-    'ヘルプ':    () => HELP_TEXT,
-  };
-
-  if (commands[text]) {
-    replyLine(replyToken, commands[text]());
-    return;
-  }
-
-  if (text.startsWith('/add ') || text.startsWith('追加 ')) {
-    const taskText = text.replace(/^\/add |^追加 /, '').trim();
-    addTask(taskText);
-    replyLine(replyToken, '✅ タスク追加しました！\n「' + taskText + '」');
-    return;
-  }
-
-  // 📅 カレンダー予定追加
-  // 書式: /cal MM/DD HH:MM タイトル  または  /cal MM/DD タイトル（終日）
-  if (text.startsWith('/cal ') || text.startsWith('予定追加 ')) {
-    replyLine(replyToken, addCalendarEvent(text.replace(/^\/cal |^予定追加 /, '').trim()));
-    return;
-  }
-
-  // 自由入力 → AI で意図判定してから実行
-  replyLine(replyToken, handleWithAI(text));
 }
 
 const HELP_TEXT = `📋 コマンド一覧
@@ -531,10 +546,14 @@ function handleWithAI(text) {
     messages: [
       {
         role: 'system',
-        content: `あなたは梶永瞳さんの専属AI相棒「月詠」です。現在日時：${now}
-ユーザーのメッセージが「予定・スケジュール・日時付きの用事」なら add_calendar_event を呼び出してください。
-「タスク・やること・ToDoリスト」なら add_task を呼び出してください。
-どちらでもない場合は、気さくで的確に日本語で返答してください。LINEなので簡潔に。`
+        content: `あなたは梶永瞳さんの専属AI相棒「月詠」です。現在日時：${now}、今年：${year}年
+
+【判断ルール】
+- メッセージに「日付（M/D, M月D日, 今日, 明日, 来週など）」または「時刻（HH:MM, H時）」が含まれる → 必ず add_calendar_event を呼び出す
+  例: 「高知さんさんテレビ 4/10 15時」「明日12時 ランチ」「3/20 打ち合わせ」
+- 日時のない「やること・タスク・ToDo」→ add_task を呼び出す
+  例: 「資料をまとめる」「買い物リスト追加」
+- どちらでもない会話 → 気さくに日本語で短く返答（LINEなので簡潔に）`
       },
       { role: 'user', content: text }
     ],
