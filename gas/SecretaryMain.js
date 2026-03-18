@@ -85,6 +85,13 @@ function handleIncomingMessage(event) {
     return;
   }
 
+  // 📅 カレンダー予定追加
+  // 書式: /cal MM/DD HH:MM タイトル  または  /cal MM/DD タイトル（終日）
+  if (text.startsWith('/cal ') || text.startsWith('予定追加 ')) {
+    replyLine(replyToken, addCalendarEvent(text.replace(/^\/cal |^予定追加 /, '').trim()));
+    return;
+  }
+
   // 自由入力 → AI
   replyLine(replyToken, callOpenAI(buildAIPrompt(text)));
 }
@@ -96,6 +103,8 @@ const HELP_TEXT = `📋 コマンド一覧
 /calendar — 今日の予定
 明日の予定 — 明日の予定
 /add [内容] — タスク追加
+/cal 3/20 15:00 会議 — 予定追加（時刻あり）
+/cal 3/20 終日イベント名 — 終日予定追加
 ✅1       — タスク1番を完了・削除
 /help     — このヘルプ
 または自由に話しかけてね！`;
@@ -332,6 +341,58 @@ function debugCalendar() {
   // 今日の予定
   const result = getTodayCalendar();
   Logger.log('今日の予定:\n' + result);
+}
+
+/**
+ * カレンダーに予定を追加する
+ * 書式パターン:
+ *   MM/DD HH:MM タイトル       → 1時間の予定
+ *   MM/DD HH:MM-HH:MM タイトル → 開始〜終了指定
+ *   MM/DD タイトル             → 終日予定
+ */
+function addCalendarEvent(input) {
+  try {
+    const now  = new Date();
+    const year = now.getFullYear();
+
+    // MM/DD HH:MM-HH:MM タイトル
+    let m = input.match(/^(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})\s+(.+)$/);
+    if (m) {
+      const start = new Date(year, m[1]-1, m[2], m[3], m[4]);
+      const end   = new Date(year, m[1]-1, m[2], m[5], m[6]);
+      const title = m[7];
+      CalendarApp.getDefaultCalendar().createEvent(title, start, end);
+      const ds = Utilities.formatDate(start, tz(), 'M月d日 HH:mm');
+      const de = Utilities.formatDate(end,   tz(), 'HH:mm');
+      return `📅 予定追加しました！\n「${title}」\n${ds}〜${de}`;
+    }
+
+    // MM/DD HH:MM タイトル（1時間）
+    m = input.match(/^(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})\s+(.+)$/);
+    if (m) {
+      const start = new Date(year, m[1]-1, m[2], m[3], m[4]);
+      const end   = new Date(start.getTime() + 60 * 60 * 1000);
+      const title = m[5];
+      CalendarApp.getDefaultCalendar().createEvent(title, start, end);
+      const ds = Utilities.formatDate(start, tz(), 'M月d日 HH:mm');
+      return `📅 予定追加しました！\n「${title}」\n${ds}〜（1時間）`;
+    }
+
+    // MM/DD タイトル（終日）
+    m = input.match(/^(\d{1,2})\/(\d{1,2})\s+(.+)$/);
+    if (m) {
+      const date  = new Date(year, m[1]-1, m[2]);
+      const title = m[3];
+      CalendarApp.getDefaultCalendar().createAllDayEvent(title, date);
+      const ds = Utilities.formatDate(date, tz(), 'M月d日');
+      return `📅 終日予定追加しました！\n「${title}」\n${ds}（終日）`;
+    }
+
+    return '⚠️ 書式が違います。\n例:\n/cal 3/20 15:00 会議\n/cal 3/20 15:00-16:30 打ち合わせ\n/cal 3/20 終日イベント名';
+  } catch (e) {
+    Logger.log('addCalendarEvent エラー: ' + e.message);
+    return 'カレンダー追加エラー: ' + e.message;
+  }
 }
 
 // ============================================================
