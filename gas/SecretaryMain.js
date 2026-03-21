@@ -236,13 +236,12 @@ function getWeather() {
 function getDateRange(offsetDays) {
   const timezone = tz();
   const ms = new Date().getTime() + offsetDays * 24 * 60 * 60 * 1000;
-  const dateStr = Utilities.formatDate(new Date(ms), timezone, 'yyyy/MM/dd');
-  const parts = dateStr.split('/').map(Number);
-  const y = parts[0], m = parts[1] - 1, d = parts[2];
-  return {
-    start: new Date(y, m, d,     0, 0, 0),
-    end:   new Date(y, m, d + 1, 0, 0, 0)  // 翌日0時（exclusive）
-  };
+  // JST での日付文字列を取得し、ISO 8601 で JST 深夜0時を正しく生成する
+  // GAS V8 は new Date(y,m,d) を UTC として扱うため、+09:00 を明示する
+  const dateStr = Utilities.formatDate(new Date(ms), timezone, 'yyyy-MM-dd');
+  const start = new Date(dateStr + 'T00:00:00+09:00');
+  const end   = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+  return { start, end };
 }
 
 /**
@@ -336,8 +335,8 @@ function getTomorrowCalendar() {
 function getEveningCalendar() {
   try {
     const { start: dayStart, end: dayEnd } = getDateRange(0);
-    const start = new Date(dayStart.getTime());
-    start.setHours(18, 0, 0, 0);
+    // dayStart は JST 深夜0時なので +18時間 = JST 18:00
+    const start = new Date(dayStart.getTime() + 18 * 60 * 60 * 1000);
     return formatEvents(fetchCalendarEvents(start, dayEnd));
   } catch (e) {
     Logger.log('getEveningCalendar エラー: ' + e.message);
