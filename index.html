@@ -826,28 +826,37 @@
 
         // 商品選択に応じてフォームの必須制御・米自動選択を更新
         function updateFormState() {
-            const sessionOnly = isSessionOnly();
+            const checkedValues = Array.from(document.querySelectorAll('input[name="product"]:checked')).map(cb => cb.value);
+            const hasRice = checkedValues.some(v => RICE_PRODUCTS.includes(v));
+            const hasSession = checkedValues.includes('セッション申し込み');
+            const sessionOnly = hasSession && !hasRice;
+
             const zipcodeInput = document.querySelector('input[name="zipcode"]');
             const addressInput = document.querySelector('input[name="address"]');
 
-            if (sessionOnly) {
-                zipcodeInput.removeAttribute('required');
-                addressInput.removeAttribute('required');
-                document.getElementById('zipcode-required').style.visibility = 'hidden';
-                document.getElementById('address-required').style.visibility = 'hidden';
-                // 米の選択をクリア
-                document.querySelectorAll('input[name="riceType"]').forEach(r => { r.checked = false; });
-            } else {
+            // 住所・郵便番号: 米商品がある場合のみ必須
+            if (hasRice) {
                 zipcodeInput.setAttribute('required', '');
                 addressInput.setAttribute('required', '');
                 document.getElementById('zipcode-required').style.visibility = '';
                 document.getElementById('address-required').style.visibility = '';
-                // 米商品あり・未選択なら結界（玄米）をデフォルト選択
+            } else {
+                zipcodeInput.removeAttribute('required');
+                addressInput.removeAttribute('required');
+                document.getElementById('zipcode-required').style.visibility = 'hidden';
+                document.getElementById('address-required').style.visibility = 'hidden';
+            }
+
+            // 米の自動選択: セッションのみなら米をクリア、米商品ありなら未選択時に結界を選択
+            if (sessionOnly) {
+                document.querySelectorAll('input[name="riceType"]').forEach(r => { r.checked = false; });
+            } else if (hasRice) {
                 const riceSelected = Array.from(document.querySelectorAll('input[name="riceType"]:checked')).length > 0;
                 if (!riceSelected) {
                     document.getElementById('rice1').checked = true;
                 }
             }
+            // 何も選択されていない場合は何もしない
         }
 
         // 商品チェックボックス変更を監視
