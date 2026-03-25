@@ -148,6 +148,7 @@ function scheduledEveningBriefing() {
 function buildMorningBriefing() {
   const dateStr = Utilities.formatDate(new Date(), tz(), 'M月d日(E)');
   const weather  = getWeather();
+  const news     = getWorldNews();
   const calendar = getTodayCalendar();
   const tasks    = getTasksByPriority();
 
@@ -156,9 +157,11 @@ function buildMorningBriefing() {
     '',
     `🌤 天気・服装\n${weather}`,
     '',
+    `🌍 世界のニュース\n${news}`,
+    '',
     `📅 今日の予定\n${calendar}`,
     '',
-    `📋 今日のタスク\n${tasks}`,
+    `📋 今日のタスク（優先順）\n${tasks}`,
   ].join('\n');
 }
 
@@ -191,12 +194,36 @@ function buildEveningBriefing() {
     msg += '🎉 全タスク完了！お疲れさま！\n\n';
   }
 
-  msg += `📅 今夜の予定\n${eveningCal}`;
+  msg += `📅 今夜の予定\n${eveningCal}\n`;
+  msg += '\n✏️ 完了したタスクがあれば「✅番号」で教えてね！\n例: ✅1  ✅2  ✅3';
   return msg;
 }
 
 // ============================================================
-// 6. 天気（wttr.in）
+// 6. 世界情勢ニュース（NHK 国際ニュース RSS）
+// ============================================================
+function getWorldNews() {
+  try {
+    const url = 'https://www3.nhk.or.jp/rss/news/cat6.xml';
+    const res  = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+    const xml  = XmlService.parse(res.getContentText());
+    const items = xml.getRootElement()
+      .getChild('channel')
+      .getChildren('item')
+      .slice(0, 5);
+    if (items.length === 0) return 'ニュースなし';
+    return items.map((item, i) => {
+      const title = item.getChildText('title') || '';
+      return `${i + 1}. ${title}`;
+    }).join('\n');
+  } catch (e) {
+    Logger.log('getWorldNews エラー: ' + e.message);
+    return 'ニュース取得エラー: ' + e.message;
+  }
+}
+
+// ============================================================
+// 7. 天気（wttr.in）
 // ============================================================
 function getWeather() {
   try {
@@ -225,7 +252,7 @@ function getWeather() {
 }
 
 // ============================================================
-// 7. カレンダー取得
+// 8. カレンダー取得
 // ============================================================
 
 /**
@@ -422,7 +449,7 @@ function addCalendarEvent(input) {
 }
 
 // ============================================================
-// 8. タスク管理（Google Sheets）
+// 9. タスク管理（Google Sheets）
 // ============================================================
 function getSheet() {
   const ss        = SpreadsheetApp.openById(getConfig('SPREADSHEET_ID'));
@@ -487,7 +514,7 @@ function completeTaskByNumber(num) {
 }
 
 // ============================================================
-// 9. AI（OpenAI gpt-4o-mini）— 意図判定 + 実行
+// 10. AI（OpenAI gpt-4o-mini）— 意図判定 + 実行
 // ============================================================
 
 /**
@@ -634,7 +661,7 @@ function execAddCalendarEvent(args, year) {
 }
 
 // ============================================================
-// 10. LINE メッセージ送信
+// 11. LINE メッセージ送信
 // ============================================================
 function replyLine(replyToken, message) {
   const token = getConfig('LINE_ACCESS_TOKEN');
