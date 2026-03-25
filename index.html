@@ -694,17 +694,17 @@
                     <input type="text" name="name" class="form-input" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="zipcode-group">
                     <label class="form-label">
-                        郵便番号 <span class="required">*必須</span>
+                        郵便番号 <span class="required" id="zipcode-required">*必須</span>
                     </label>
                     <input type="text" name="zipcode" class="form-input" placeholder="例）123-4567" required>
                     <small class="form-note">ハイフンを含めてご入力ください</small>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="address-group">
                     <label class="form-label">
-                        住所 <span class="required">*必須</span>
+                        住所 <span class="required" id="address-required">*必須</span>
                     </label>
                     <input type="text" name="address" class="form-input" placeholder="都道府県から建物名・部屋番号まで" required>
                 </div>
@@ -751,7 +751,7 @@
                     <label class="form-label">お米の種類</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="rice1" name="riceType" value="結界（玄米）" checked>
+                            <input type="radio" id="rice1" name="riceType" value="結界（玄米）">
                             <label for="rice1">結界（玄米）</label>
                         </div>
                         <div class="radio-option">
@@ -814,6 +814,47 @@
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbys5hoN8LxlMqs1H9dQ5zLk9YaV84E20RikkahTXgC5EP_poWx_QEAxLqKss_v3IyWj/exec';
 
+        const RICE_PRODUCTS = ['お試しサポート（2,222円）', '日常調和セット（4,444円）', 'トリニティセット（8,888円）'];
+
+        // セッションのみ選択か判定（米商品が1つも選ばれていない）
+        function isSessionOnly() {
+            const checkedValues = Array.from(document.querySelectorAll('input[name="product"]:checked')).map(cb => cb.value);
+            const hasRice = checkedValues.some(v => RICE_PRODUCTS.includes(v));
+            const hasSession = checkedValues.includes('セッション申し込み');
+            return hasSession && !hasRice;
+        }
+
+        // 商品選択に応じてフォームの必須制御・米自動選択を更新
+        function updateFormState() {
+            const sessionOnly = isSessionOnly();
+            const zipcodeInput = document.querySelector('input[name="zipcode"]');
+            const addressInput = document.querySelector('input[name="address"]');
+
+            if (sessionOnly) {
+                zipcodeInput.removeAttribute('required');
+                addressInput.removeAttribute('required');
+                document.getElementById('zipcode-required').style.visibility = 'hidden';
+                document.getElementById('address-required').style.visibility = 'hidden';
+                // 米の選択をクリア
+                document.querySelectorAll('input[name="riceType"]').forEach(r => { r.checked = false; });
+            } else {
+                zipcodeInput.setAttribute('required', '');
+                addressInput.setAttribute('required', '');
+                document.getElementById('zipcode-required').style.visibility = '';
+                document.getElementById('address-required').style.visibility = '';
+                // 米商品あり・未選択なら結界（玄米）をデフォルト選択
+                const riceSelected = Array.from(document.querySelectorAll('input[name="riceType"]:checked')).length > 0;
+                if (!riceSelected) {
+                    document.getElementById('rice1').checked = true;
+                }
+            }
+        }
+
+        // 商品チェックボックス変更を監視
+        document.querySelectorAll('input[name="product"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateFormState);
+        });
+
         function selectProduct(productName) {
             document.getElementById('order-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => {
@@ -823,6 +864,7 @@
                         checkbox.checked = true;
                     }
                 });
+                updateFormState();
             }, 500);
         }
 
