@@ -3,62 +3,393 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="月音香（Tsukineka）— 月と水と静寂の癒し。月音香米・セッションのご案内。" />
-  <title>月音香 Tsukineka</title>
-
-  <!-- Google Fonts: Noto Serif JP -->
+  <meta name="description" content="月音香 心身調律アライメントマップ — 五行気質診断・望診チェック・整え方提案" />
+  <title>月音香 心身調律アライメントマップ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- =========================
-    ナビゲーション
-  ========================= -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- ===== HEADER ===== -->
   <header class="site-header">
     <nav class="nav-inner">
-      <a href="#top" class="logo">月音香</a>
+      <a href="#top" class="logo">
+        <span class="logo-main">月音香</span>
+        <span class="logo-sub">Tsukineka</span>
+      </a>
       <ul class="nav-links">
-        <li><a href="#about">月音香とは</a></li>
+        <li><a href="#top">ホーム</a></li>
+        <li><a href="#diagnosis">気質診断</a></li>
         <li><a href="#rice">月音香米</a></li>
         <li><a href="#session">セッション</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
       </ul>
     </nav>
   </header>
 
 
-  <!-- =========================
-    ヒーロー
-  ========================= -->
+  <!-- ===== HERO / INTRO ===== -->
   <section id="top" class="hero fade-in">
-    <div class="hero-inner">
-      <p class="hero-sub">— moon · water · stillness —</p>
-      <h1 class="hero-title">月音香</h1>
-      <p class="hero-catch">静寂のなかに、あなたの音を聴く。</p>
-      <div class="hero-actions">
-        <a href="#rice" class="btn btn-primary">月音香米🌾 を見る</a>
-        <a href="#session" class="btn btn-secondary">セッションを申し込む</a>
+    <div class="hero-moon-wrap" aria-hidden="true">
+      <div class="hero-moon">
+        <div class="moon-glow"></div>
       </div>
+      <div class="moon-ring r1"></div>
+      <div class="moon-ring r2"></div>
+      <div class="moon-ring r3"></div>
     </div>
-    <div class="hero-moon" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">— Five Elements Alignment —</p>
+      <h1 class="hero-title">月音香</h1>
+      <p class="hero-subtitle">心身調律アライメントマップ</p>
+      <p class="hero-catch">あなたの内なる氣の声を、ここで聴きましょう。</p>
+      <a href="#diagnosis" class="btn-start">
+        <span class="btn-start-inner">診断を始める</span>
+      </a>
+    </div>
+
+    <div class="hero-water" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path class="wave w1" d="M0,50 C360,90 720,10 1080,50 C1260,70 1380,40 1440,50 L1440,100 L0,100Z"/>
+        <path class="wave w2" d="M0,68 C280,44 560,92 840,68 C1120,44 1280,88 1440,68 L1440,100 L0,100Z"/>
+      </svg>
+    </div>
   </section>
 
 
-  <!-- =========================
-    月音香とは（About）
-  ========================= -->
+  <!-- ===== DIAGNOSIS SECTION ===== -->
+  <section id="diagnosis" class="diagnosis">
+
+    <!-- STEP 1: 五気質診断（15問） -->
+    <div class="diag-panel" id="diag-step1" hidden>
+      <div class="diag-panel-inner">
+
+        <div class="step-header">
+          <p class="step-badge">STEP 1</p>
+          <h2 class="step-title">五気質診断</h2>
+          <p class="step-desc">各質問に対して、1〜5 であなたに当てはまる数字を選んでください。</p>
+          <div class="step-legend">
+            <span>1 全く当てはまらない</span>
+            <span class="legend-sep">→</span>
+            <span>5 とても当てはまる</span>
+          </div>
+        </div>
+
+        <!-- Page 0: Q1–Q5 -->
+        <div class="s1-page" id="s1p0">
+          <div class="q-group" data-qname="q1">
+            <p class="q-text"><span class="q-num">Q1</span> 物事の本質や意味を深く考えることが多い</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q1" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q1" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q1" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q1" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q1" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q2">
+            <p class="q-text"><span class="q-num">Q2</span> 一度決めたらすぐ行動に移すタイプだ</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q2" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q2" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q2" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q2" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q2" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q3">
+            <p class="q-text"><span class="q-num">Q3</span> アイデアやひらめきがよく浮かぶ</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q3" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q3" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q3" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q3" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q3" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q4">
+            <p class="q-text"><span class="q-num">Q4</span> 人の気持ちに敏感で共感しやすい</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q4" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q4" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q4" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q4" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q4" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q5">
+            <p class="q-text"><span class="q-num">Q5</span> コツコツ続けることが得意だ</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q5" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q5" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q5" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q5" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q5" value="5"/><span>5</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 1: Q6–Q10 -->
+        <div class="s1-page" id="s1p1" hidden>
+          <div class="q-group" data-qname="q6">
+            <p class="q-text"><span class="q-num">Q6</span> 無駄を省き、シンプルにしたいと感じる</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q6" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q6" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q6" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q6" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q6" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q7">
+            <p class="q-text"><span class="q-num">Q7</span> じっとしているより動いていたい</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q7" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q7" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q7" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q7" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q7" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q8">
+            <p class="q-text"><span class="q-num">Q8</span> 新しいことや変化が好き</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q8" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q8" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q8" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q8" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q8" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q9">
+            <p class="q-text"><span class="q-num">Q9</span> 人に頼られると断れないことが多い</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q9" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q9" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q9" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q9" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q9" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q10">
+            <p class="q-text"><span class="q-num">Q10</span> 安定した環境に安心感を感じる</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q10" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q10" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q10" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q10" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q10" value="5"/><span>5</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 2: Q11–Q15 -->
+        <div class="s1-page" id="s1p2" hidden>
+          <div class="q-group" data-qname="q11">
+            <p class="q-text"><span class="q-num">Q11</span> 感情をあまり表に出さない</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q11" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q11" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q11" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q11" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q11" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q12">
+            <p class="q-text"><span class="q-num">Q12</span> イライラしやすい、または熱くなりやすい</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q12" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q12" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q12" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q12" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q12" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q13">
+            <p class="q-text"><span class="q-num">Q13</span> 集中力が続かないと感じることがある</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q13" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q13" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q13" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q13" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q13" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q14">
+            <p class="q-text"><span class="q-num">Q14</span> 寂しさや不安を感じやすい</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q14" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q14" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q14" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q14" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q14" value="5"/><span>5</span></label>
+            </div>
+          </div>
+          <div class="q-group" data-qname="q15">
+            <p class="q-text"><span class="q-num">Q15</span> 考えすぎて動けなくなることがある</p>
+            <div class="rating-row">
+              <label class="r-opt"><input type="radio" name="q15" value="1"/><span>1</span></label>
+              <label class="r-opt"><input type="radio" name="q15" value="2"/><span>2</span></label>
+              <label class="r-opt"><input type="radio" name="q15" value="3"/><span>3</span></label>
+              <label class="r-opt"><input type="radio" name="q15" value="4"/><span>4</span></label>
+              <label class="r-opt"><input type="radio" name="q15" value="5"/><span>5</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress & Nav -->
+        <div class="step-progress-wrap">
+          <div class="step-progress-track">
+            <div class="step-progress-fill" id="s1-progress-fill"></div>
+          </div>
+          <p class="step-progress-label" id="s1-progress-label">1 / 3</p>
+        </div>
+        <div class="step-nav">
+          <button class="btn-ghost-diag" id="s1-prev" hidden>← 戻る</button>
+          <button class="btn-gold-sm" id="s1-next">次へ →</button>
+          <button class="btn-gold-sm" id="s1-done" hidden>STEP 2 へ →</button>
+        </div>
+
+      </div>
+    </div>
+    <!-- /diag-step1 -->
+
+
+    <!-- STEP 2: 望診チェック -->
+    <div class="diag-panel" id="diag-step2" hidden>
+      <div class="diag-panel-inner">
+
+        <div class="step-header">
+          <p class="step-badge">STEP 2</p>
+          <h2 class="step-title">望診チェック</h2>
+          <p class="step-desc">各部位について、今のあなたに一番近いものを選んでください。</p>
+        </div>
+
+        <!-- おでこ -->
+        <div class="boushin-card" data-area="forehead">
+          <div class="boushin-label-row">
+            <p class="boushin-part">おでこ</p>
+            <p class="boushin-element">思考・腸・大地</p>
+          </div>
+          <div class="boushin-opts">
+            <label class="b-opt"><input type="radio" name="forehead" value="1"/><span>①なめらか</span></label>
+            <label class="b-opt"><input type="radio" name="forehead" value="2"/><span>②くすみ・テカリ</span></label>
+            <label class="b-opt"><input type="radio" name="forehead" value="3"/><span>③ブツブツ</span></label>
+            <label class="b-opt"><input type="radio" name="forehead" value="4"/><span>④乾燥</span></label>
+          </div>
+        </div>
+
+        <!-- 眉間 -->
+        <div class="boushin-card" data-area="eyebrow">
+          <div class="boushin-label-row">
+            <p class="boushin-part">眉間</p>
+            <p class="boushin-element">ストレス・肝・風氣</p>
+          </div>
+          <div class="boushin-opts">
+            <label class="b-opt"><input type="radio" name="eyebrow" value="1"/><span>①問題なし</span></label>
+            <label class="b-opt"><input type="radio" name="eyebrow" value="2"/><span>②シワ・張り</span></label>
+            <label class="b-opt"><input type="radio" name="eyebrow" value="3"/><span>③赤み</span></label>
+            <label class="b-opt"><input type="radio" name="eyebrow" value="4"/><span>④力が入る</span></label>
+          </div>
+        </div>
+
+        <!-- 目 -->
+        <div class="boushin-card" data-area="eye">
+          <div class="boushin-label-row">
+            <p class="boushin-part">目</p>
+            <p class="boushin-element">感情・血・月華／灯火</p>
+          </div>
+          <div class="boushin-opts">
+            <label class="b-opt"><input type="radio" name="eye" value="1"/><span>①安定</span></label>
+            <label class="b-opt"><input type="radio" name="eye" value="2"/><span>②疲れ</span></label>
+            <label class="b-opt"><input type="radio" name="eye" value="3"/><span>③クマ</span></label>
+            <label class="b-opt"><input type="radio" name="eye" value="4"/><span>④充血</span></label>
+          </div>
+        </div>
+
+        <!-- 頬 -->
+        <div class="boushin-card" data-area="cheek">
+          <div class="boushin-label-row">
+            <p class="boushin-part">頬</p>
+            <p class="boushin-element">肺・免疫・月華</p>
+          </div>
+          <div class="boushin-opts">
+            <label class="b-opt"><input type="radio" name="cheek" value="1"/><span>①健康</span></label>
+            <label class="b-opt"><input type="radio" name="cheek" value="2"/><span>②乾燥</span></label>
+            <label class="b-opt"><input type="radio" name="cheek" value="3"/><span>③赤み</span></label>
+            <label class="b-opt"><input type="radio" name="cheek" value="4"/><span>④荒れ</span></label>
+          </div>
+        </div>
+
+        <!-- 鼻 -->
+        <div class="boushin-card" data-area="nose">
+          <div class="boushin-label-row">
+            <p class="boushin-part">鼻</p>
+            <p class="boushin-element">胃・脾・大地</p>
+          </div>
+          <div class="boushin-opts">
+            <label class="b-opt"><input type="radio" name="nose" value="1"/><span>①安定</span></label>
+            <label class="b-opt"><input type="radio" name="nose" value="2"/><span>②テカリ</span></label>
+            <label class="b-opt"><input type="radio" name="nose" value="3"/><span>③赤み</span></label>
+            <label class="b-opt"><input type="radio" name="nose" value="4"/><span>④毛穴</span></label>
+          </div>
+        </div>
+
+        <!-- 口・顎 -->
+        <div class="boushin-card" data-area="mouth">
+          <div class="boushin-label-row">
+            <p class="boushin-part">口・顎</p>
+            <p class="boushin-element">ホルモン・抑圧・灯火</p>
+          </div>
+          <div class="boushin-opts">
+            <label class="b-opt"><input type="radio" name="mouth" value="1"/><span>①リラックス</span></label>
+            <label class="b-opt"><input type="radio" name="mouth" value="2"/><span>②乾燥</span></label>
+            <label class="b-opt"><input type="radio" name="mouth" value="3"/><span>③緊張</span></label>
+            <label class="b-opt"><input type="radio" name="mouth" value="4"/><span>④食いしばり</span></label>
+          </div>
+        </div>
+
+        <div class="step-nav" style="margin-top:2rem;">
+          <button class="btn-ghost-diag" id="s2-back">← STEP 1 へ戻る</button>
+          <button class="btn-gold-sm" id="s2-done">結果を見る ✦</button>
+        </div>
+
+      </div>
+    </div>
+    <!-- /diag-step2 -->
+
+
+    <!-- RESULTS -->
+    <div class="diag-panel" id="diag-results" hidden>
+      <div class="diag-panel-inner" id="diag-results-content">
+        <!-- dynamically rendered by script.js -->
+      </div>
+    </div>
+    <!-- /diag-results -->
+
+  </section>
+  <!-- /diagnosis -->
+
+
+  <!-- ===== ABOUT ===== -->
   <section id="about" class="about fade-in">
     <div class="section-inner narrow">
+      <div class="moon-phases-row" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15"/><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2 A10,10 0 1,1 12,22 A6,6 0 1,0 12,2Z" fill="currentColor" opacity=".35"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2 A10,10 0 0,1 12,22Z" fill="currentColor" opacity=".55"/><path d="M12,2 A10,10 0 0,0 12,22Z" fill="currentColor" opacity=".15"/></svg>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".75"/></svg>
+      </div>
       <span class="section-label">About</span>
       <h2 class="section-title">月音香とは</h2>
       <p class="section-text">
-        月の巡りと水の流れに寄り添い、<br class="br-sp" />
+        月の巡りと水の流れに寄り添い、<br />
         静かに内なる声を聴く場所。<br /><br />
-        月音香は、自然と調和した癒しの空間として、<br class="br-sp" />
+        月音香は、自然と調和した癒しの空間として、<br />
         心と体をやさしく整えるセッションと、<br />
         大地の恵みを受けた月音香米🌾をお届けします。
       </p>
@@ -66,36 +397,20 @@
   </section>
 
 
-  <!-- =========================
-    月音香米🌾 購入フォーム（既存をそのまま貼る／編集禁止）
-    ここから
-  ========================= -->
+  <!-- ===== RICE ===== -->
   <section id="rice" class="rice fade-in">
     <div class="section-inner">
       <span class="section-label">Rice</span>
       <h2 class="section-title">月音香米🌾</h2>
-      <p class="section-text">
-        月の光と清らかな水で育まれた、<br />
-        大地の恵みをそのままに。
-      </p>
-
+      <p class="section-text">月の光と清らかな水で育まれた、大地の恵みをそのままに。</p>
       <div id="tsukineka-rice-purchase-form">
-        <!-- TODO: ここに既存の購入フォームHTMLをそのまま貼る（編集禁止） -->
+        <!-- TODO: ここに既存の購入フォームを貼る -->
       </div>
-
     </div>
   </section>
-  <!-- =========================
-    ここまで
-  ========================= -->
 
 
-  <!-- =========================
-    セッション申し込みフォーム
-    ※ 実装方式：B — Formspree（差し替え可能）
-       action の "YOUR_FORMSPREE_ID" を実際のIDに差し替えてください。
-       例: https://formspree.io/f/abcdefgh
-  ========================= -->
+  <!-- ===== SESSION ===== -->
   <section id="session" class="session fade-in">
     <div class="section-inner narrow">
       <span class="section-label">Session</span>
@@ -104,100 +419,76 @@
         月音香のセッションへのお申し込みフォームです。<br />
         送信後、公式LINEよりご案内をお送りします。
       </p>
-
-      <!-- ▼ セッション申し込みフォーム（Formspree） -->
-      <form
-        id="session-form"
-        class="session-form"
-        action="https://formspree.io/f/YOUR_FORMSPREE_ID"
-        method="POST"
-      >
+      <form id="session-form" class="session-form"
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
         <div class="form-group">
-          <label for="name">お名前 <span class="required">必須</span></label>
-          <input type="text" id="name" name="name" placeholder="山田 花子" required autocomplete="name" />
+          <label for="f-name">お名前 <span class="required">必須</span></label>
+          <input type="text" id="f-name" name="name" placeholder="山田 花子" required autocomplete="name"/>
         </div>
-
         <div class="form-group">
-          <label for="kana">フリガナ <span class="required">必須</span></label>
-          <input type="text" id="kana" name="kana" placeholder="ヤマダ ハナコ" required />
+          <label for="f-kana">フリガナ <span class="required">必須</span></label>
+          <input type="text" id="f-kana" name="kana" placeholder="ヤマダ ハナコ" required/>
         </div>
-
         <div class="form-group">
-          <label for="email">メールアドレス <span class="required">必須</span></label>
-          <input type="email" id="email" name="email" placeholder="example@mail.com" required autocomplete="email" />
+          <label for="f-email">メールアドレス <span class="required">必須</span></label>
+          <input type="email" id="f-email" name="email" placeholder="example@mail.com" required autocomplete="email"/>
         </div>
-
         <div class="form-group">
-          <label for="tel">電話番号</label>
-          <input type="tel" id="tel" name="tel" placeholder="090-0000-0000" autocomplete="tel" />
+          <label for="f-tel">電話番号</label>
+          <input type="tel" id="f-tel" name="tel" placeholder="090-0000-0000" autocomplete="tel"/>
         </div>
-
         <div class="form-group">
-          <label for="session-type">ご希望のセッション <span class="required">必須</span></label>
-          <select id="session-type" name="session-type" required>
+          <label for="f-type">ご希望のセッション <span class="required">必須</span></label>
+          <select id="f-type" name="session-type" required>
             <option value="" disabled selected>選択してください</option>
             <option value="individual">個人セッション</option>
             <option value="online">オンラインセッション</option>
-            <option value="other">その他（備考欄にご記入ください）</option>
+            <option value="other">その他</option>
           </select>
         </div>
-
         <div class="form-group">
-          <label for="message">ご質問・備考</label>
-          <textarea id="message" name="message" rows="4" placeholder="ご自由にお書きください"></textarea>
+          <label for="f-msg">ご質問・備考</label>
+          <textarea id="f-msg" name="message" rows="4" placeholder="ご自由にお書きください"></textarea>
         </div>
-
-        <!-- Formspree スパム対策 -->
-        <input type="text" name="_gotcha" style="display:none" />
-
-        <!-- 送信後リダイレクト（モーダル表示のため空欄にする） -->
-        <input type="hidden" name="_next" value="about:blank" />
-
-        <button type="submit" class="btn btn-submit" id="submit-btn">
-          申し込む
-        </button>
+        <input type="text" name="_gotcha" style="display:none"/>
+        <input type="hidden" name="_next" value="about:blank"/>
+        <button type="submit" class="btn-submit" id="submit-btn">申し込む</button>
       </form>
-      <!-- ▲ セッション申し込みフォーム ここまで -->
 
-
-      <!-- ▼ 送信完了メッセージ（初期は非表示） -->
       <div id="form-success" class="form-success" aria-live="polite" hidden>
-        <div class="success-icon" aria-hidden="true">🌕</div>
+        <div class="success-icon">🌕</div>
         <h3 class="success-title">お申し込みありがとうございます</h3>
-        <p class="success-text">
-          ご入力内容を確認のうえ、メールにてご連絡いたします。<br />
-          次のステップとして、公式LINEへのご登録をお願いします。
-        </p>
-
-        <!-- 公式LINE登録ボタン（送信完了後に表示） -->
-        <a
-          href="https://lin.ee/REPLACE_ME"
-          class="btn btn-line"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <p class="success-text">ご入力内容を確認のうえ、メールにてご連絡いたします。<br/>公式LINEへのご登録もお願いします。</p>
+        <a href="https://lin.ee/pZutbEM" class="btn-line" target="_blank" rel="noopener noreferrer">
+          <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.145 2 11.25c0 3.926 2.461 7.338 6.105 9.03-.084.756-.32 2.41-.367 2.78-.059.46.167.455.352.33.145-.097 1.946-1.314 2.73-1.847.387.054.78.082 1.18.082 5.523 0 10-4.145 10-9.25S17.523 2 12 2z"/>
           </svg>
-          公式LINEに登録して次の案内を受け取る
+          公式LINEに登録する
         </a>
       </div>
-      <!-- ▲ 送信完了メッセージ ここまで -->
-
     </div>
   </section>
 
 
-  <!-- =========================
-    フッター
-  ========================= -->
+  <!-- ===== FOOTER ===== -->
   <footer id="contact" class="site-footer">
     <div class="footer-inner">
+      <div class="footer-moon" aria-hidden="true">
+        <svg viewBox="0 0 60 60" width="44" height="44">
+          <defs>
+            <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f0d896"/>
+              <stop offset="100%" stop-color="#c8a84b"/>
+            </linearGradient>
+          </defs>
+          <circle cx="30" cy="30" r="26" fill="none" stroke="url(#fg)" stroke-width="1" opacity=".5"/>
+          <path d="M30,4 A26,26 0 1,1 30,56 A17,17 0 1,0 30,4Z" fill="url(#fg)" opacity=".3"/>
+        </svg>
+      </div>
       <p class="footer-logo">月音香 Tsukineka</p>
       <p class="footer-copy">&copy; 2025 Tsukineka. All rights reserved.</p>
     </div>
   </footer>
-
 
   <script src="script.js"></script>
 </body>
