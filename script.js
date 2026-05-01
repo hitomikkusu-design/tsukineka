@@ -310,7 +310,10 @@
   function showPanel(panel) {
     [$step1Panel, $step2Panel, $resultsPanel].forEach(function(p) { p.hidden = true; });
     panel.hidden = false;
-    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function() {
+      var top = panel.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 60);
   }
 
   function setShake(el) {
@@ -357,13 +360,19 @@
     if (!validateStep1Page()) return;
     step1Page++;
     updateStep1UI();
-    $step1Panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function() {
+      var top = $step1Panel.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 60);
   });
 
   $s1Prev && $s1Prev.addEventListener('click', function() {
     step1Page--;
     updateStep1UI();
-    $step1Panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function() {
+      var top = $step1Panel.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 60);
   });
 
   $s1Done && $s1Done.addEventListener('click', function() {
@@ -602,7 +611,10 @@
       $step2Panel.hidden = true;
       $resultsPanel.hidden = true;
       setTimeout(function() {
-        $step1Panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(function() {
+      var top = $step1Panel.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 60);
       }, 80);
     });
   }
