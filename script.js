@@ -574,12 +574,18 @@
 
     $resultsContent.innerHTML = buildResultHTML(primary, secondary, stateText);
 
+    /* タイプ別クラス適用 */
+    var RES_CLASSES = ['res-hakuryu','res-toka','res-fuki','res-gekka','res-daichi'];
+    RES_CLASSES.forEach(function(c){ $resultsPanel.classList.remove(c); });
+    $resultsPanel.classList.add('res-' + primaryId);
+
     /* リトライボタン */
     var retryBtn = document.getElementById('quiz-retry');
     if (retryBtn) {
       retryBtn.addEventListener('click', function() {
         /* リセット */
         answers = {}; boushin = {}; step1Page = 0;
+        RES_CLASSES.forEach(function(c){ $resultsPanel.classList.remove(c); });
         document.querySelectorAll('.q-group, .boushin-card').forEach(function(el) { el.classList.remove('answered'); });
         document.querySelectorAll('input[type="radio"]').forEach(function(r) { r.checked = false; });
         updateStep1UI();

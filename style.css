@@ -1118,3 +1118,228 @@ button { cursor: pointer; background: none; border: none; }
   .hero-moon-wrap { right: 8%; }
   .result-types-row { gap: 2rem; }
 }
+
+/* ================================================
+   結果ページ — 大気的ライトテーマ
+   ================================================ */
+
+/* ── ベース：ライト背景へ切り替え ── */
+#diag-results {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(165deg, #f0ecfa 0%, #e8e0f5 40%, #f5f0ff 100%) !important;
+}
+
+/* 大きな発光オーブ（右上） */
+#diag-results::before {
+  content: '';
+  position: absolute;
+  top: -90px; right: -90px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(155,127,212,0.4) 0%, rgba(155,127,212,0.1) 45%, transparent 70%);
+  filter: blur(36px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbPulse 5s ease-in-out infinite;
+}
+
+/* 副オーブ（左下） */
+#diag-results::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(200,168,75,0.22) 0%, rgba(200,168,75,0.05) 50%, transparent 72%);
+  filter: blur(44px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbPulse 5s ease-in-out infinite 1.8s;
+}
+
+@keyframes orbPulse {
+  0%,100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.1); }
+}
+
+/* コンテンツを前面に */
+#diag-results .diag-panel-inner { position: relative; z-index: 2; }
+
+/* ── タイプ別オーバーレイ ── */
+#diag-results.res-hakuryu {
+  background: linear-gradient(165deg, #f0ecfc 0%, #e6e0f8 40%, #f2effe 100%) !important;
+}
+#diag-results.res-hakuryu::before {
+  background: radial-gradient(ellipse, rgba(155,127,212,0.45) 0%, rgba(155,127,212,0.12) 45%, transparent 70%);
+}
+
+#diag-results.res-toka {
+  background: linear-gradient(165deg, #fff6ee 0%, #fde6cc 40%, #fff2e4 100%) !important;
+}
+#diag-results.res-toka::before {
+  background: radial-gradient(ellipse, rgba(224,90,40,0.38) 0%, rgba(240,160,80,0.1) 45%, transparent 70%);
+}
+#diag-results.res-toka::after {
+  background: radial-gradient(ellipse, rgba(200,140,60,0.24) 0%, rgba(200,140,60,0.06) 50%, transparent 72%);
+}
+
+#diag-results.res-fuki {
+  background: linear-gradient(165deg, #eaf8f5 0%, #d6ede8 40%, #e6f6f2 100%) !important;
+}
+#diag-results.res-fuki::before {
+  background: radial-gradient(ellipse, rgba(42,173,138,0.32) 0%, rgba(42,173,138,0.08) 45%, transparent 70%);
+}
+#diag-results.res-fuki::after {
+  background: radial-gradient(ellipse, rgba(42,173,138,0.2) 0%, rgba(42,173,138,0.05) 50%, transparent 72%);
+}
+
+#diag-results.res-gekka {
+  background: linear-gradient(165deg, #f8eaff 0%, #ead4f8 40%, #f6e8ff 100%) !important;
+}
+#diag-results.res-gekka::before {
+  background: radial-gradient(ellipse, rgba(168,85,200,0.42) 0%, rgba(168,85,200,0.12) 45%, transparent 70%);
+}
+#diag-results.res-gekka::after {
+  background: radial-gradient(ellipse, rgba(220,150,255,0.22) 0%, rgba(220,150,255,0.06) 50%, transparent 72%);
+}
+
+#diag-results.res-daichi {
+  background: linear-gradient(165deg, #fdf7ec 0%, #f5e6cc 40%, #faf2dc 100%) !important;
+}
+#diag-results.res-daichi::before {
+  background: radial-gradient(ellipse, rgba(184,120,32,0.38) 0%, rgba(200,160,60,0.1) 45%, transparent 70%);
+}
+#diag-results.res-daichi::after {
+  background: radial-gradient(ellipse, rgba(184,120,32,0.22) 0%, rgba(200,160,60,0.06) 50%, transparent 72%);
+}
+
+/* ── 浮遊キラキラ（中央オーバーレイ） ── */
+#diag-results .diag-panel-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle 1.8px at  8% 10%, rgba(200,168,75,0.65) 0%, transparent 100%),
+    radial-gradient(circle 1.2px at 20%  6%, rgba(200,168,75,0.45) 0%, transparent 100%),
+    radial-gradient(circle 2.2px at 68%  4%, rgba(200,168,75,0.55) 0%, transparent 100%),
+    radial-gradient(circle 1px  at 90% 14%, rgba(200,168,75,0.4)  0%, transparent 100%),
+    radial-gradient(circle 1.5px at 38% 28%, rgba(200,168,75,0.38) 0%, transparent 100%),
+    radial-gradient(circle 1px  at 82% 32%, rgba(200,168,75,0.45) 0%, transparent 100%),
+    radial-gradient(circle 1.8px at 14% 50%, rgba(200,168,75,0.38) 0%, transparent 100%),
+    radial-gradient(circle 1.2px at 58% 62%, rgba(200,168,75,0.35) 0%, transparent 100%),
+    radial-gradient(circle 2px  at 86% 70%, rgba(200,168,75,0.42) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 44% 88%, rgba(200,168,75,0.42) 0%, transparent 100%),
+    radial-gradient(circle 1px  at 26% 92%, rgba(200,168,75,0.28) 0%, transparent 100%),
+    radial-gradient(circle 1.8px at 74% 95%, rgba(200,168,75,0.38) 0%, transparent 100%);
+  animation: sparkleFloat 8s ease-in-out infinite alternate;
+}
+
+#diag-results .diag-panel-inner > * { position: relative; z-index: 1; }
+
+@keyframes sparkleFloat {
+  from { opacity: 0.55; transform: translateY(0); }
+  to   { opacity: 1;    transform: translateY(-6px); }
+}
+
+/* ── タイプバッジ拡大（結果ページ専用） ── */
+#diag-results .type-badge-icon {
+  width: 112px;
+  height: 112px;
+}
+#diag-results .type-badge-icon svg { width: 74px; height: 74px; }
+
+#diag-results .badge-hakuryu .type-badge-icon {
+  background: radial-gradient(ellipse, rgba(155,127,212,0.25), rgba(155,127,212,0.07));
+  box-shadow: 0 0 32px rgba(155,127,212,0.4), 0 0 70px rgba(155,127,212,0.12);
+}
+#diag-results .badge-hakuryu .type-badge-name { color: #5c38b8; }
+
+#diag-results .badge-toka .type-badge-icon {
+  background: radial-gradient(ellipse, rgba(224,90,40,0.25), rgba(224,90,40,0.07));
+  box-shadow: 0 0 32px rgba(224,90,40,0.4), 0 0 70px rgba(224,90,40,0.12);
+}
+#diag-results .badge-toka .type-badge-name { color: #b83a14; }
+
+#diag-results .badge-fuki .type-badge-icon {
+  background: radial-gradient(ellipse, rgba(42,173,138,0.25), rgba(42,173,138,0.07));
+  box-shadow: 0 0 32px rgba(42,173,138,0.4), 0 0 70px rgba(42,173,138,0.12);
+}
+#diag-results .badge-fuki .type-badge-name { color: #177a5c; }
+
+#diag-results .badge-gekka .type-badge-icon {
+  background: radial-gradient(ellipse, rgba(168,85,200,0.25), rgba(168,85,200,0.07));
+  box-shadow: 0 0 32px rgba(168,85,200,0.4), 0 0 70px rgba(168,85,200,0.12);
+}
+#diag-results .badge-gekka .type-badge-name { color: #7a18a0; }
+
+#diag-results .badge-daichi .type-badge-icon {
+  background: radial-gradient(ellipse, rgba(184,120,32,0.25), rgba(184,120,32,0.07));
+  box-shadow: 0 0 32px rgba(184,120,32,0.4), 0 0 70px rgba(184,120,32,0.12);
+}
+#diag-results .badge-daichi .type-badge-name { color: #7a5400; }
+
+#diag-results .type-badge-role,
+#diag-results .type-badge-kana { color: var(--ink-soft); }
+#diag-results .types-cross     { color: var(--gold-dk); }
+
+/* ── テキスト（ライト背景対応）── */
+#diag-results .result-pretext  { color: var(--gold-dk); }
+#diag-results .result-type-title { color: var(--ink); }
+#diag-results .result-type-sub { color: var(--ink-mid); }
+#diag-results .rc-title        { color: var(--ink); }
+#diag-results .rc-num {
+  background: rgba(200,168,75,0.15);
+  border-color: rgba(139,105,20,0.4);
+  color: var(--gold-dk);
+}
+#diag-results .rc-body         { color: var(--ink-mid); }
+#diag-results .care-text       { color: var(--ink-mid); }
+#diag-results .care-label      { color: var(--gold-dk); border-color: rgba(139,105,20,0.35); }
+#diag-results .care-item       { background: rgba(255,255,255,0.55); }
+#diag-results .essence-names   { color: var(--ink-mid); }
+#diag-results .essence-cat     { color: var(--ink-soft); }
+#diag-results .essence-original-note { color: var(--ink-mid); }
+#diag-results .essence-original-name { color: var(--gold-dk); }
+#diag-results .step-badge      { color: var(--gold-dk); border-color: rgba(139,105,20,0.35); }
+#diag-results .cta-lead        { color: var(--ink-mid); }
+#diag-results .qr-caption      { color: var(--ink-soft); }
+#diag-results .btn-session     { color: var(--gold-dk); border-color: rgba(139,105,20,0.45); }
+#diag-results .btn-session:hover { background: rgba(200,168,75,0.12); border-color: var(--gold-dk); }
+#diag-results .btn-ghost-diag  { color: var(--ink-soft); border-color: rgba(0,0,0,0.15); }
+#diag-results .btn-ghost-diag:hover { color: var(--gold-dk); border-color: rgba(139,105,20,0.4); }
+
+/* ── 結果カード（ライト用）── */
+#diag-results .result-card {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+}
+#diag-results .rc-hakuryu { border-color: rgba(155,127,212,0.35); box-shadow: 0 4px 24px rgba(155,127,212,0.15); }
+#diag-results .rc-toka    { border-color: rgba(224,90,40,0.3);    box-shadow: 0 4px 24px rgba(224,90,40,0.12); }
+#diag-results .rc-fuki    { border-color: rgba(42,173,138,0.3);   box-shadow: 0 4px 24px rgba(42,173,138,0.12); }
+#diag-results .rc-gekka   { border-color: rgba(168,85,200,0.3);   box-shadow: 0 4px 24px rgba(168,85,200,0.15); }
+#diag-results .rc-daichi  { border-color: rgba(184,120,32,0.3);   box-shadow: 0 4px 24px rgba(184,120,32,0.12); }
+#diag-results .rc-state   { border-color: rgba(200,168,75,0.22); }
+
+/* ── エッセンスオリジナル ── */
+#diag-results .essence-original {
+  background: linear-gradient(135deg, rgba(200,168,75,0.12), rgba(200,168,75,0.04));
+}
+
+/* ── result-header オーナメント ── */
+#diag-results .result-header {
+  padding-bottom: 1rem;
+}
+#diag-results .result-type-sub::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1rem auto 0;
+  opacity: 0.7;
+}
