@@ -1,495 +1,306 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="月音香 心身調律アライメントマップ — 五行気質診断・望診チェック・整え方提案" />
-  <title>月音香 心身調律アライメントマップ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260501c" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>月音香｜土佐の鰹から生まれたエラスチン</title>
+<meta name="description" content="月音香（つきねか）は、土佐の鰹から生まれたエラスチンをお届けします。蘇る。本当のわたしへ。先行予約と公式LINEでのご案内を受け付けています。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="月音香｜土佐の鰹から生まれたエラスチン">
+<meta property="og:description" content="月音香（つきねか）は、土佐の鰹から生まれたエラスチンをお届けします。蘇る。本当のわたしへ。先行予約と公式LINEでのご案内を受け付けています。">
+<meta property="og:locale" content="ja_JP">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F8F5EE;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto}
+a{color:inherit}a:hover{opacity:.8}
+input,select,textarea,button{font-family:inherit}
+input:focus,select:focus,textarea:focus,a:focus-visible,button:focus-visible{outline:2px solid #DCC48E;outline-offset:2px}
+button[disabled]{opacity:.6;cursor:default}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
+<div style="font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; color: #1C2B2C; background: #F8F5EE; line-height: 1.9; font-size: 16px">
 
-  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+<header style="background: #12383C; color: #F6F3EC; padding: 20px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+<a href="#top" style="text-decoration: none; display: flex; align-items: baseline; gap: 12px">
+<span style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 26px; font-weight: 600; letter-spacing: 0.2em">月音香</span>
+<span style="font-size: 11px; letter-spacing: 0.3em; color: #B5C7C6">TSUKINEKA</span>
+</a>
+<nav aria-label="メインメニュー" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-size: 14px">
+<a href="#story" style="text-decoration: none; padding: 12px 0">ものがたり</a>
+<a href="#elastin" style="text-decoration: none; padding: 12px 0">鰹エラスチン</a>
+<a href="#maker" style="text-decoration: none; padding: 12px 0">つくり手</a>
+<a href="#books" style="text-decoration: none; padding: 12px 0">著書</a>
+<a href="#session" style="text-decoration: none; padding: 12px 0">セッション</a>
+<a href="#reserve" style="text-decoration: none; padding: 10px 22px; border: 1px solid #DCC48E; color: #DCC48E; border-radius: 999px">先行予約</a>
+</nav>
+</div>
+</header>
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
-    <nav class="nav-inner">
-      <a href="#top" class="logo">
-        <span class="logo-main">月音香</span>
-        <span class="logo-sub">Tsukineka</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#top">ホーム</a></li>
-        <li><a href="#diagnosis">気質診断</a></li>
-        <li><a href="#rice">月音香米</a></li>
-        <li><a href="#session">セッション</a></li>
-      </ul>
-    </nav>
-  </header>
+<section id="top" style="background: #12383C; color: #F6F3EC; padding: 72px clamp(20px, 5vw, 80px) 112px">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 56px 64px">
+<div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #DCC48E">土佐の鰹から生まれた、月音香のエラスチン</p>
+<h1 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(34px, 9vw, 72px); line-height: 1.4; letter-spacing: 0.08em; white-space: nowrap">蘇る。<br>本当のわたしへ。</h1>
+<p style="margin: 0; max-width: 520px; font-size: 17px; color: #DCE6E4">しなやかさ、弾力、巡る力。<br>からだが本来もっているものを、もう一度。</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 8px">
+<a href="#reserve" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 36px; background: #DCC48E; color: #12383C; font-weight: 700; font-size: 16px; letter-spacing: 0.08em; text-decoration: none; border-radius: 999px">先行予約を申し込む</a>
+<a href="https://lin.ee/wllFZWO" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 48px; font-size: 15px; color: #F6F3EC; text-underline-offset: 6px">公式LINEで案内を受け取る</a>
+</div>
+<p style="margin: 0; font-size: 13px; color: #B5C7C6; letter-spacing: 0.1em">ただいま、発売に向けて準備を進めています。</p>
+</div>
+<div aria-hidden="true" style="flex: 1 1 320px; display: flex; justify-content: center">
+<div style="width: min(380px, 70vw); aspect-ratio: 1 / 1; border-radius: 50%; background: #E9E4D4; box-shadow: 0 0 120px rgba(233, 228, 212, 0.28), inset -36px -28px 0 rgba(18, 56, 60, 0.10)"></div>
+</div>
+</div>
+</section>
 
+<section id="story" style="padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 56px 80px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #6B5318">ものがたり</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(30px, 4.2vw, 46px); line-height: 1.5; letter-spacing: 0.06em">鰹一尾に、<br>わずか二グラム。</h2>
+<div style="display: flex; align-items: center; gap: 20px; padding: 24px 0; border-top: 1px solid #D6CFBF; border-bottom: 1px solid #D6CFBF; margin-top: 8px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #55615F; letter-spacing: 0.1em">鰹 一尾</span>
+<span style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 30px; line-height: 1.3">約2.8kg</span>
+</div>
+<svg aria-hidden="true" width="56" height="12" viewBox="0 0 56 12" fill="none" stroke="#55615F" stroke-width="1"><path d="M0 6h54M48 1l6 5-6 5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #55615F; letter-spacing: 0.1em">動脈球</span>
+<span style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 30px; line-height: 1.3">約2g</span>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 24px; font-size: 16px">
+<p style="margin: 0">鰹の心臓を、土佐の漁師町では「チチコ」と呼びます。その先についた小さな白い部位が「動脈球」。漁師町では心臓といっしょに甘辛く炊いて、大切に食べ継いできました。</p>
+<p style="margin: 0">けれど多くの浜では、使いみちのないまま手放されてきた部位でもあります。</p>
+<p style="margin: 0">休むことなく泳ぎつづける鰹の、しなやかな拍動を受けとめてきたところ。そこに、エラスチンが宿っています。</p>
+<p style="margin: 0">エラスチンは、肌や血管、靭帯などにあって、伸び縮みする弾力を支えているタンパク質です。</p>
+<p style="margin: 0">肌の張りや弾力、つややかさを土台から支えているのが、エラスチンです。よく知られたコラーゲンも、エラスチンという支えがあってこそ生きてきます。</p>
+<p style="margin: 0">なかでも魚由来のエラスチンは、いま注目を集めている素材です。血管のしなやかさや肌の弾力についての研究が重ねられ、血小板の凝集を抑えるはたらきに関する特許（特許第5590704号）も登録されるなど、これからの可能性が期待されています。</p>
+<p style="margin: 0; font-size: 12px; line-height: 1.8; color: #55615F">※からだの成り立ちと、素材についての研究・特許を紹介したもので、商品の効果・効能を示すものではありません。</p>
+<p style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 20px; line-height: 1.9">眠っていた海の恵みを、もう一度、人のからだへ。<br>そして新しい価値となって、また浜へ、海へと巡っていく。<br>蘇り、巡る。月音香の鰹エラスチンは、そこから始まりました。</p>
+</div>
+</div>
+</section>
 
-  <!-- ===== HERO / INTRO ===== -->
-  <section id="top" class="hero fade-in">
-    <div class="hero-moon-wrap" aria-hidden="true">
-      <div class="hero-moon">
-        <div class="moon-glow"></div>
-      </div>
-      <div class="moon-ring r1"></div>
-      <div class="moon-ring r2"></div>
-      <div class="moon-ring r3"></div>
-    </div>
+<section id="philosophy" style="background: #12383C; color: #F6F3EC; padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 24px; max-width: 760px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #DCC48E">月音香が大切にしていること</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(28px, 3.8vw, 42px); line-height: 1.6; letter-spacing: 0.06em">若く見せるためではなく、<br>本来の美しさへ還るために。</h2>
+<p style="margin: 0; color: #DCE6E4">美しさと健やかさは、別々のものではありません。からだの内側がのびやかであること。それが、その人らしい美しさになっていくと、月音香は考えています。</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 40px 48px">
+<div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #3C6367">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 26px; letter-spacing: 0.1em">しなやかさ</h3>
+<p style="margin: 0; color: #DCE6E4; font-size: 15px">こわばりをほどいて、やわらかく動けること。</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #3C6367">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 26px; letter-spacing: 0.1em">弾力</h3>
+<p style="margin: 0; color: #DCE6E4; font-size: 15px">押されても、また自分のかたちへ戻ってこられること。</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #3C6367">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 26px; letter-spacing: 0.1em">巡る力</h3>
+<p style="margin: 0; color: #DCE6E4; font-size: 15px">とどこおらず、めぐりつづけていること。</p>
+</div>
+</div>
+<p style="margin: 0; font-size: 12px; color: #B5C7C6">※月音香の考え方を表したもので、商品の効果・効能を示すものではありません。</p>
+</div>
+</section>
 
-    <div class="hero-inner">
-      <p class="hero-eyebrow">— Five Elements Alignment —</p>
-      <h1 class="hero-title">月音香</h1>
-      <p class="hero-subtitle">心身調律アライメントマップ</p>
-      <p class="hero-catch">あなたの内なる氣の声を、ここで聴きましょう。</p>
-      <a href="#diagnosis" class="btn-start">
-        <span class="btn-start-inner">診断を始める</span>
-      </a>
-    </div>
+<section id="elastin" style="padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 760px; margin: 0 auto">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #6B5318">鰹エラスチン</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(30px, 4.2vw, 46px); line-height: 1.5; letter-spacing: 0.06em">月音香の<br>鰹エラスチン</h2>
+<p style="margin: 0">毎日の暮らしのなかで、無理なく続けられるかたちでお届けします。くわしい内容は、先行予約・公式LINEにご登録の方へ、いちばん先にお知らせします。</p>
+<p style="margin: 0; padding: 20px 0; border-top: 1px solid #D6CFBF; border-bottom: 1px solid #D6CFBF; font-size: 15px">発売の時期、かたち、価格は、決まりしだいこのページと公式LINEでお知らせします。</p>
+<div style="display: flex">
+<a href="#reserve" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 36px; background: #12383C; color: #F8F5EE; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; border-radius: 999px">先行予約を申し込む</a>
+</div>
+</div>
+</div>
+</section>
 
-    <div class="hero-water" aria-hidden="true">
-      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path class="wave w1" d="M0,50 C360,90 720,10 1080,50 C1260,70 1380,40 1440,50 L1440,100 L0,100Z"/>
-        <path class="wave w2" d="M0,68 C280,44 560,92 840,68 C1120,44 1280,88 1440,68 L1440,100 L0,100Z"/>
-      </svg>
-    </div>
-  </section>
+<section id="maker" style="background: #EFE8DA; padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 760px; margin: 0 auto">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #6B5318">つくり手</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(30px, 4.2vw, 46px); line-height: 1.5; letter-spacing: 0.12em">梶永 瞳</h2>
+<p style="margin: 0">看護師として二十七年。救急、小児救急の現場で、命と向き合ってきました。</p>
+<p style="margin: 0">そのなかで確かめてきたのは、人のからだには、もう一度動き出す力が備わっているということ。月音香は、その力が蘇るきっかけを届けたくて生まれました。</p>
+<p style="margin: 0; font-size: 14px; color: #55615F">月音香 主宰／ラジオ番組「月音香」パーソナリティ</p>
+</div>
+</div>
+</section>
 
+<section id="books" style="padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #6B5318">著書</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(28px, 3.8vw, 42px); line-height: 1.6; letter-spacing: 0.06em">梶永瞳の本</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 48px 56px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<img src="assets/gappon-cover.jpg" alt="『躰は、ぜんぶ覚えていた【完全統合版】』の表紙" width="1018" height="1498" style="width: 100%; aspect-ratio: 2 / 3; object-fit: cover; display: block">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 20px; line-height: 1.6; letter-spacing: 0.04em">躰は、ぜんぶ覚えていた<br>【完全統合版】</h3>
+<a href="https://amzn.asia/d/0bovoehb" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-underline-offset: 6px">Amazonで見る</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<img src="assets/shohan-cover.jpg" alt="『躰は、ぜんぶ覚えていた』の表紙" style="width: 100%; aspect-ratio: 2 / 3; object-fit: cover; display: block">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 20px; line-height: 1.6; letter-spacing: 0.04em">躰は、ぜんぶ覚えていた</h3>
+<a href="https://amzn.asia/d/0gT1OBII" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-underline-offset: 6px">Amazonで見る</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<img src="assets/taiyo-cover.jpg" alt="『太陽のナース8760日の軌跡（奇跡）』の表紙" style="width: 100%; aspect-ratio: 2 / 3; object-fit: cover; display: block">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 20px; line-height: 1.6; letter-spacing: 0.04em"><ruby>太陽<rt>ひかり</rt></ruby>のナース<br>8760日の軌跡（奇跡）</h3>
+<a href="https://amzn.asia/d/0gZNVTHe" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-underline-offset: 6px">Amazonで見る</a>
+</div>
+</div>
+</div>
+</section>
 
-  <!-- ===== DIAGNOSIS SECTION ===== -->
-  <section id="diagnosis" class="diagnosis">
+<section id="session" style="background: #EFE8DA; padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 48px 80px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #6B5318">月音香セッション</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(28px, 3.8vw, 42px); line-height: 1.6; letter-spacing: 0.06em">感情から、<br>躰をととのえる。</h2>
+</div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0">月音香セッションは、エネルギー療法の一環としておこなう個人セッションです。お話をうかがいながら、いまのあなたに合わせてネイチャーエッセンスとフラワーエッセンスを調合し、処方します。</p>
+<p style="margin: 0">不調がかたちになる前の「未病」の段階で、まず揺れているのは感情です。月音香は、その感情の部分からのアプローチを大切にしています。</p>
+<div style="display: flex">
+<a href="https://lin.ee/wllFZWO" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 36px; background: #12383C; color: #F8F5EE; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; border-radius: 999px">公式LINEでセッションを相談する</a>
+</div>
+<p style="margin: 0; padding-top: 20px; border-top: 1px solid #C9C0AC; font-size: 13px; line-height: 1.9; color: #4A5654">※フラワーエッセンスは、花のもつ性質を水に写しとってつくられる、感情や心のバランスに働きかけるための自然療法です。香りの成分を含む精油（アロマオイル）とは異なります。医薬品ではなく、病気の診断や治療を目的とするものではありません。</p>
+</div>
+</div>
+</section>
 
-    <!-- STEP 1: 五気質診断（15問） -->
-    <div class="diag-panel" id="diag-step1" hidden>
-      <div class="diag-panel-inner">
+<section id="reserve" style="background: #12383C; color: #F6F3EC; padding: 112px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 24px; max-width: 760px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.3em; color: #DCC48E">先行予約</p>
+<h2 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: clamp(28px, 3.8vw, 42px); line-height: 1.6; letter-spacing: 0.06em">いちばん先に、お届けします。</h2>
+<p style="margin: 0; color: #DCE6E4">先行予約は、発売のときに優先してご案内するためのお申し込みです。価格と内容が決まりしだいお知らせし、ご確認いただいてから正式なご注文となります。</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 48px 64px; align-items: start">
 
-        <div class="step-header">
-          <p class="step-badge">STEP 1</p>
-          <h2 class="step-title">五気質診断</h2>
-          <p class="step-desc">各質問に対して、1〜5 であなたに当てはまる数字を選んでください。</p>
-          <div class="step-legend">
-            <span>1 全く当てはまらない</span>
-            <span class="legend-sep">→</span>
-            <span>5 とても当てはまる</span>
-          </div>
-        </div>
+<div style="padding: 40px; background: #18474B; border: 1px solid #3C6367">
+<form id="reserve-form" novalidate style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="rv-name" style="font-size: 14px">お名前</label>
+<input id="rv-name" name="name" type="text" required autocomplete="name" style="min-height: 48px; padding: 0 16px; font-size: 16px; color: #1C2B2C; background: #F8F5EE; border: 1px solid #9A9482; border-radius: 4px; box-sizing: border-box; width: 100%">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="rv-mail" style="font-size: 14px">メールアドレス</label>
+<input id="rv-mail" name="email" type="email" required autocomplete="email" style="min-height: 48px; padding: 0 16px; font-size: 16px; color: #1C2B2C; background: #F8F5EE; border: 1px solid #9A9482; border-radius: 4px; box-sizing: border-box; width: 100%">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="rv-qty" style="font-size: 14px">ご希望の数</label>
+<select id="rv-qty" name="qty" style="min-height: 48px; padding: 0 12px; font-size: 16px; color: #1C2B2C; background: #F8F5EE; border: 1px solid #9A9482; border-radius: 4px; box-sizing: border-box; width: 100%">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4以上（ご連絡欄にご記入ください）</option>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="rv-note" style="font-size: 14px">ご連絡欄（任意）</label>
+<textarea id="rv-note" name="note" rows="3" style="padding: 12px 16px; font-size: 16px; line-height: 1.7; color: #1C2B2C; background: #F8F5EE; border: 1px solid #9A9482; border-radius: 4px; box-sizing: border-box; width: 100%; resize: vertical"></textarea>
+</div>
+<div style="position: absolute; left: -9999px" aria-hidden="true">
+<label for="rv-site">このらんは空のままにしてください</label>
+<input id="rv-site" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.8; color: #DCE6E4">ご入力いただいた内容は、先行予約と発売のご案内のためにのみ使います。くわしくは<a href="privacy.html" style="color: #DCC48E; text-underline-offset: 4px">プライバシーポリシー</a>をご覧ください。</p>
+<p id="reserve-error" role="alert" hidden style="margin: 0; padding: 12px 16px; font-size: 14px; line-height: 1.8; color: #12383C; background: #F3D9C9; border-radius: 4px"></p>
+<button id="reserve-submit" type="submit" style="min-height: 56px; padding: 0 36px; background: #DCC48E; color: #12383C; font-weight: 700; font-size: 16px; letter-spacing: 0.08em; border: none; border-radius: 999px; cursor: pointer">先行予約を申し込む</button>
+</form>
+<div id="reserve-thanks" role="status" tabindex="-1" hidden style="display: flex; flex-direction: column; gap: 16px; padding: 24px 0">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 26px; letter-spacing: 0.08em">お申し込みありがとうございます。</h3>
+<p style="margin: 0; color: #DCE6E4">発売が近づきましたら、いちばん先にご案内をお送りします。公式LINEにもご登録いただくと、準備のようすをお届けできます。</p>
+<div style="display: flex">
+<a href="https://lin.ee/wllFZWO" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 48px; color: #DCC48E; text-underline-offset: 6px">公式LINEに登録する</a>
+</div>
+</div>
+</div>
 
-        <!-- Page 0: Q1–Q5 -->
-        <div class="s1-page" id="s1p0">
-          <div class="q-group" data-qname="q1">
-            <p class="q-text"><span class="q-num">Q1</span> 物事の本質や意味を深く考えることが多い</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q1" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q1" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q1" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q1" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q1" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q2">
-            <p class="q-text"><span class="q-num">Q2</span> 一度決めたらすぐ行動に移すタイプだ</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q2" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q2" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q2" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q2" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q2" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q3">
-            <p class="q-text"><span class="q-num">Q3</span> アイデアやひらめきがよく浮かぶ</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q3" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q3" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q3" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q3" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q3" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q4">
-            <p class="q-text"><span class="q-num">Q4</span> 人の気持ちに敏感で共感しやすい</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q4" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q4" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q4" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q4" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q4" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q5">
-            <p class="q-text"><span class="q-num">Q5</span> コツコツ続けることが得意だ</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q5" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q5" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q5" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q5" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q5" value="5"/><span>5</span></label>
-            </div>
-          </div>
-        </div>
+<div id="line" style="display: flex; flex-direction: column; gap: 20px; padding: 40px; border: 1px solid #3C6367">
+<h3 style="margin: 0; font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-weight: 500; font-size: 24px; line-height: 1.6; letter-spacing: 0.08em">まずは、案内だけ受け取りたい方へ</h3>
+<p style="margin: 0; color: #DCE6E4; font-size: 15px">公式LINEにご登録いただいた方へ、エラスチンの基礎知識をまとめたミニガイドをお届けします。発売日や内容のお知らせも、こちらからお送りします。</p>
+<div style="display: flex">
+<a href="https://lin.ee/wllFZWO" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 36px; border: 1px solid #DCC48E; color: #DCC48E; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; border-radius: 999px">公式LINEに登録する</a>
+</div>
+<p style="margin: 0; font-size: 12px; color: #B5C7C6">lin.ee/wllFZWO</p>
+</div>
 
-        <!-- Page 1: Q6–Q10 -->
-        <div class="s1-page" id="s1p1" hidden>
-          <div class="q-group" data-qname="q6">
-            <p class="q-text"><span class="q-num">Q6</span> 無駄を省き、シンプルにしたいと感じる</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q6" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q6" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q6" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q6" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q6" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q7">
-            <p class="q-text"><span class="q-num">Q7</span> じっとしているより動いていたい</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q7" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q7" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q7" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q7" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q7" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q8">
-            <p class="q-text"><span class="q-num">Q8</span> 新しいことや変化が好き</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q8" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q8" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q8" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q8" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q8" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q9">
-            <p class="q-text"><span class="q-num">Q9</span> 人に頼られると断れないことが多い</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q9" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q9" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q9" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q9" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q9" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q10">
-            <p class="q-text"><span class="q-num">Q10</span> 安定した環境に安心感を感じる</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q10" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q10" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q10" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q10" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q10" value="5"/><span>5</span></label>
-            </div>
-          </div>
-        </div>
+</div>
+</div>
+</section>
 
-        <!-- Page 2: Q11–Q15 -->
-        <div class="s1-page" id="s1p2" hidden>
-          <div class="q-group" data-qname="q11">
-            <p class="q-text"><span class="q-num">Q11</span> 感情をあまり表に出さない</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q11" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q11" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q11" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q11" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q11" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q12">
-            <p class="q-text"><span class="q-num">Q12</span> イライラしやすい、または熱くなりやすい</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q12" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q12" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q12" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q12" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q12" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q13">
-            <p class="q-text"><span class="q-num">Q13</span> 集中力が続かないと感じることがある</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q13" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q13" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q13" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q13" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q13" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q14">
-            <p class="q-text"><span class="q-num">Q14</span> 寂しさや不安を感じやすい</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q14" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q14" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q14" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q14" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q14" value="5"/><span>5</span></label>
-            </div>
-          </div>
-          <div class="q-group" data-qname="q15">
-            <p class="q-text"><span class="q-num">Q15</span> 考えすぎて動けなくなることがある</p>
-            <div class="rating-row">
-              <label class="r-opt"><input type="radio" name="q15" value="1"/><span>1</span></label>
-              <label class="r-opt"><input type="radio" name="q15" value="2"/><span>2</span></label>
-              <label class="r-opt"><input type="radio" name="q15" value="3"/><span>3</span></label>
-              <label class="r-opt"><input type="radio" name="q15" value="4"/><span>4</span></label>
-              <label class="r-opt"><input type="radio" name="q15" value="5"/><span>5</span></label>
-            </div>
-          </div>
-        </div>
+<footer style="background: #0B2A2D; color: #B5C7C6; padding: 56px clamp(20px, 5vw, 80px)">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; font-size: 13px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 22px; letter-spacing: 0.2em; color: #F6F3EC">月音香</span>
+<span>運営：菜食賢美</span>
+<span>© 2026 月音香</span>
+</div>
+<nav aria-label="フッターメニュー" style="display: flex; flex-wrap: wrap; gap: 4px 28px">
+<a href="privacy.html" style="padding: 12px 0">プライバシーポリシー</a>
+<a href="https://lin.ee/wllFZWO" target="_blank" rel="noopener" style="padding: 12px 0">お問い合わせ（公式LINE）</a>
+</nav>
+</div>
+</footer>
 
-        <!-- Progress & Nav -->
-        <div class="step-progress-wrap">
-          <div class="step-progress-track">
-            <div class="step-progress-fill" id="s1-progress-fill"></div>
-          </div>
-          <p class="step-progress-label" id="s1-progress-label">1 / 3</p>
-        </div>
-        <div class="step-nav">
-          <button class="btn-ghost-diag" id="s1-prev" hidden>← 戻る</button>
-          <button class="btn-gold-sm" id="s1-next">次へ →</button>
-          <button class="btn-gold-sm" id="s1-done" hidden>STEP 2 へ →</button>
-        </div>
-
-      </div>
-    </div>
-    <!-- /diag-step1 -->
-
-
-    <!-- STEP 2: 望診チェック -->
-    <div class="diag-panel" id="diag-step2" hidden>
-      <div class="diag-panel-inner">
-
-        <div class="step-header">
-          <p class="step-badge">STEP 2</p>
-          <h2 class="step-title">望診チェック</h2>
-          <p class="step-desc">各部位について、今のあなたに一番近いものを選んでください。</p>
-        </div>
-
-        <!-- おでこ -->
-        <div class="boushin-card" data-area="forehead">
-          <div class="boushin-label-row">
-            <p class="boushin-part">おでこ</p>
-            <p class="boushin-element">思考・腸・大地</p>
-          </div>
-          <div class="boushin-opts">
-            <label class="b-opt"><input type="radio" name="forehead" value="1"/><span>①なめらか</span></label>
-            <label class="b-opt"><input type="radio" name="forehead" value="2"/><span>②くすみ・テカリ</span></label>
-            <label class="b-opt"><input type="radio" name="forehead" value="3"/><span>③ブツブツ</span></label>
-            <label class="b-opt"><input type="radio" name="forehead" value="4"/><span>④乾燥</span></label>
-          </div>
-        </div>
-
-        <!-- 眉間 -->
-        <div class="boushin-card" data-area="eyebrow">
-          <div class="boushin-label-row">
-            <p class="boushin-part">眉間</p>
-            <p class="boushin-element">ストレス・肝・風氣</p>
-          </div>
-          <div class="boushin-opts">
-            <label class="b-opt"><input type="radio" name="eyebrow" value="1"/><span>①問題なし</span></label>
-            <label class="b-opt"><input type="radio" name="eyebrow" value="2"/><span>②シワ・張り</span></label>
-            <label class="b-opt"><input type="radio" name="eyebrow" value="3"/><span>③赤み</span></label>
-            <label class="b-opt"><input type="radio" name="eyebrow" value="4"/><span>④力が入る</span></label>
-          </div>
-        </div>
-
-        <!-- 目 -->
-        <div class="boushin-card" data-area="eye">
-          <div class="boushin-label-row">
-            <p class="boushin-part">目</p>
-            <p class="boushin-element">感情・血・月華／灯火</p>
-          </div>
-          <div class="boushin-opts">
-            <label class="b-opt"><input type="radio" name="eye" value="1"/><span>①安定</span></label>
-            <label class="b-opt"><input type="radio" name="eye" value="2"/><span>②疲れ</span></label>
-            <label class="b-opt"><input type="radio" name="eye" value="3"/><span>③クマ</span></label>
-            <label class="b-opt"><input type="radio" name="eye" value="4"/><span>④充血</span></label>
-          </div>
-        </div>
-
-        <!-- 頬 -->
-        <div class="boushin-card" data-area="cheek">
-          <div class="boushin-label-row">
-            <p class="boushin-part">頬</p>
-            <p class="boushin-element">肺・免疫・月華</p>
-          </div>
-          <div class="boushin-opts">
-            <label class="b-opt"><input type="radio" name="cheek" value="1"/><span>①健康</span></label>
-            <label class="b-opt"><input type="radio" name="cheek" value="2"/><span>②乾燥</span></label>
-            <label class="b-opt"><input type="radio" name="cheek" value="3"/><span>③赤み</span></label>
-            <label class="b-opt"><input type="radio" name="cheek" value="4"/><span>④荒れ</span></label>
-          </div>
-        </div>
-
-        <!-- 鼻 -->
-        <div class="boushin-card" data-area="nose">
-          <div class="boushin-label-row">
-            <p class="boushin-part">鼻</p>
-            <p class="boushin-element">胃・脾・大地</p>
-          </div>
-          <div class="boushin-opts">
-            <label class="b-opt"><input type="radio" name="nose" value="1"/><span>①安定</span></label>
-            <label class="b-opt"><input type="radio" name="nose" value="2"/><span>②テカリ</span></label>
-            <label class="b-opt"><input type="radio" name="nose" value="3"/><span>③赤み</span></label>
-            <label class="b-opt"><input type="radio" name="nose" value="4"/><span>④毛穴</span></label>
-          </div>
-        </div>
-
-        <!-- 口・顎 -->
-        <div class="boushin-card" data-area="mouth">
-          <div class="boushin-label-row">
-            <p class="boushin-part">口・顎</p>
-            <p class="boushin-element">ホルモン・抑圧・灯火</p>
-          </div>
-          <div class="boushin-opts">
-            <label class="b-opt"><input type="radio" name="mouth" value="1"/><span>①リラックス</span></label>
-            <label class="b-opt"><input type="radio" name="mouth" value="2"/><span>②乾燥</span></label>
-            <label class="b-opt"><input type="radio" name="mouth" value="3"/><span>③緊張</span></label>
-            <label class="b-opt"><input type="radio" name="mouth" value="4"/><span>④食いしばり</span></label>
-          </div>
-        </div>
-
-        <div class="step-nav" style="margin-top:2rem;">
-          <button class="btn-ghost-diag" id="s2-back">← STEP 1 へ戻る</button>
-          <button class="btn-gold-sm" id="s2-done">結果を見る ✦</button>
-        </div>
-
-      </div>
-    </div>
-    <!-- /diag-step2 -->
-
-
-    <!-- RESULTS -->
-    <div class="diag-panel" id="diag-results" hidden>
-      <div class="diag-panel-inner" id="diag-results-content">
-        <!-- dynamically rendered by script.js -->
-      </div>
-    </div>
-    <!-- /diag-results -->
-
-  </section>
-  <!-- /diagnosis -->
-
-
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="about fade-in">
-    <div class="section-inner narrow">
-      <div class="moon-phases-row" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15"/><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12,2 A10,10 0 1,1 12,22 A6,6 0 1,0 12,2Z" fill="currentColor" opacity=".35"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12,2 A10,10 0 0,1 12,22Z" fill="currentColor" opacity=".55"/><path d="M12,2 A10,10 0 0,0 12,22Z" fill="currentColor" opacity=".15"/></svg>
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".75"/></svg>
-      </div>
-      <span class="section-label">About</span>
-      <h2 class="section-title">月音香とは</h2>
-      <p class="section-text">
-        月の巡りと水の流れに寄り添い、<br />
-        静かに内なる声を聴く場所。<br /><br />
-        月音香は、自然と調和した癒しの空間として、<br />
-        心と体をやさしく整えるセッションと、<br />
-        大地の恵みを受けた月音香米🌾をお届けします。
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ===== RICE ===== -->
-  <section id="rice" class="rice fade-in">
-    <div class="section-inner">
-      <span class="section-label">Rice</span>
-      <h2 class="section-title">月音香米🌾</h2>
-      <p class="section-text">月の光と清らかな水で育まれた、大地の恵みをそのままに。</p>
-      <div id="tsukineka-rice-purchase-form">
-        <!-- TODO: ここに既存の購入フォームを貼る -->
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== SESSION ===== -->
-  <section id="session" class="session fade-in">
-    <div class="section-inner narrow">
-      <span class="section-label">Session</span>
-      <h2 class="section-title">セッション申し込み</h2>
-      <p class="section-text">
-        月音香のセッションへのお申し込みフォームです。<br />
-        送信後、公式LINEよりご案内をお送りします。
-      </p>
-      <form id="session-form" class="session-form"
-            action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-        <div class="form-group">
-          <label for="f-name">お名前 <span class="required">必須</span></label>
-          <input type="text" id="f-name" name="name" placeholder="山田 花子" required autocomplete="name"/>
-        </div>
-        <div class="form-group">
-          <label for="f-kana">フリガナ <span class="required">必須</span></label>
-          <input type="text" id="f-kana" name="kana" placeholder="ヤマダ ハナコ" required/>
-        </div>
-        <div class="form-group">
-          <label for="f-email">メールアドレス <span class="required">必須</span></label>
-          <input type="email" id="f-email" name="email" placeholder="example@mail.com" required autocomplete="email"/>
-        </div>
-        <div class="form-group">
-          <label for="f-tel">電話番号</label>
-          <input type="tel" id="f-tel" name="tel" placeholder="090-0000-0000" autocomplete="tel"/>
-        </div>
-        <div class="form-group">
-          <label for="f-type">ご希望のセッション <span class="required">必須</span></label>
-          <select id="f-type" name="session-type" required>
-            <option value="" disabled selected>選択してください</option>
-            <option value="individual">個人セッション</option>
-            <option value="online">オンラインセッション</option>
-            <option value="other">その他</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="f-msg">ご質問・備考</label>
-          <textarea id="f-msg" name="message" rows="4" placeholder="ご自由にお書きください"></textarea>
-        </div>
-        <input type="text" name="_gotcha" style="display:none"/>
-        <input type="hidden" name="_next" value="about:blank"/>
-        <button type="submit" class="btn-submit" id="submit-btn">申し込む</button>
-      </form>
-
-      <div id="form-success" class="form-success" aria-live="polite" hidden>
-        <div class="success-icon">🌕</div>
-        <h3 class="success-title">お申し込みありがとうございます</h3>
-        <p class="success-text">ご入力内容を確認のうえ、メールにてご連絡いたします。<br/>公式LINEへのご登録もお願いします。</p>
-        <a href="https://lin.ee/pZutbEM" class="btn-line" target="_blank" rel="noopener noreferrer">
-          <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.145 2 11.25c0 3.926 2.461 7.338 6.105 9.03-.084.756-.32 2.41-.367 2.78-.059.46.167.455.352.33.145-.097 1.946-1.314 2.73-1.847.387.054.78.082 1.18.082 5.523 0 10-4.145 10-9.25S17.523 2 12 2z"/>
-          </svg>
-          公式LINEに登録する
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===== FOOTER ===== -->
-  <footer id="contact" class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-moon" aria-hidden="true">
-        <svg viewBox="0 0 60 60" width="44" height="44">
-          <defs>
-            <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f0d896"/>
-              <stop offset="100%" stop-color="#c8a84b"/>
-            </linearGradient>
-          </defs>
-          <circle cx="30" cy="30" r="26" fill="none" stroke="url(#fg)" stroke-width="1" opacity=".5"/>
-          <path d="M30,4 A26,26 0 1,1 30,56 A17,17 0 1,0 30,4Z" fill="url(#fg)" opacity=".3"/>
-        </svg>
-      </div>
-      <p class="footer-logo">月音香 Tsukineka</p>
-      <p class="footer-copy">&copy; 2025 Tsukineka. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js?v=20260501c"></script>
+</div>
+<script>
+(function () {
+  // Google Apps Script の「ウェブアプリ」URL を下の '' の中に貼り付けてください。
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyvMKvT1RzEFGFTgHrItDdsGJ32wy0P0oH9vH5X8qM6f5DLcGeio5GmANK5o9d3A8qB/exec';
+  var form = document.getElementById('reserve-form');
+  if (!form) return;
+  var thanks = document.getElementById('reserve-thanks');
+  var error = document.getElementById('reserve-error');
+  var button = document.getElementById('reserve-submit');
+  function fail(message) {
+    error.textContent = message;
+    error.hidden = false;
+    button.disabled = false;
+    button.textContent = '先行予約を申し込む';
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    error.hidden = true;
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    if (!name) { fail('お名前をご入力ください。'); form.elements.name.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail('メールアドレスをご確認ください。'); form.elements.email.focus(); return; }
+    if (!ENDPOINT) { fail('ただいま受付の準備中です。おそれいりますが、公式LINEからご連絡ください。'); return; }
+    button.disabled = true;
+    button.textContent = '送信しています…';
+    var data = new URLSearchParams(new FormData(form));
+    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+      .then(function () {
+        form.hidden = true;
+        thanks.hidden = false;
+        thanks.focus();
+      })
+      .catch(function () {
+        fail('送信できませんでした。通信状況をご確認のうえ、もう一度お試しください。');
+      });
+  });
+})();
+</script>
 </body>
 </html>
